@@ -10,6 +10,7 @@
 %       a live cell, as if by reproduction.
 % Given these rules, this function represents the next state of the
 % game of life given the current state
+% Code and debug time: 4 hr (Conrad)
 function [next_state] = game_of_life(curr_state)
 sz = size(curr_state);
 next_state = zeros(sz);
@@ -29,6 +30,7 @@ end
 
 % This counts the amount of neighbors that are living in
 % the array at index i and j
+% Code and debug time 4hr (Conrad Zborowski)
 function [count] = check_living(arr, i, j)
 count = 0;
 sz = size(arr);

@@ -10,56 +10,66 @@
 %       a live cell, as if by reproduction.
 % Given these rules, this function represents the next state of the
 % game of life given the current state
-% Code and debug time: 4 hr (Conrad)
-function [next_state] = game_of_life(curr_state)
-sz = size(curr_state);
-next_state = zeros(sz);
-for i = 1:sz(1)
-    for j = 1:sz(2)
-        living_amt = check_living(curr_state, i, j);
-        if living_amt == 3
-            next_state(i,j) = 1;
+% Code and debug time: 4 hr (Conrad) 5.5 hr (Ted) (Pair programming 3h,2.5
+% Hr reworking logic because of bug)
+% 
+% 
+function new_board = game_of_life(curr_board)
+[cols,rows] = size(curr_board);
+new_board = zeros(rows,cols);
+for col = 1:cols
+    for row = 1:rows
+        living_neighbors = 0;
+        if calc_neighbor(curr_board,col-1,row-1)
+            living_neighbors = living_neighbors + 1;
         end 
-        if living_amt == 2 && curr_state(i,j) == 1
-            next_state(i,j) = 1;
+        if calc_neighbor(curr_board,col-1,row)
+            living_neighbors = living_neighbors + 1;
         end 
-    end 
-end
-end
-
-
-% This counts the amount of neighbors that are living in
-% the array at index i and j
-% Code and debug time 4hr (Conrad Zborowski)
-function [count] = check_living(arr, i, j)
-count = 0;
-sz = size(arr);
-if i >= 2
-    count = arr(i - 1, j) + count;
-    if j >= 2
-        count = arr(i - 1, j - 1) + count;
-    end 
-end
-
-if j >= 2
-    count = arr(i, j - 1) + count;
-    if i < sz(1)
-        count = arr(i + 1, j - 1) + count;
-    end 
-end
-
-if i < sz(1)
-    count = arr(i + 1, j) + count;
-    if j < sz(2)
-        count = arr(i + 1, j + 1) + count;
+        if calc_neighbor(curr_board,col-1,row+1)
+            living_neighbors = living_neighbors + 1;
+        end 
+        if calc_neighbor(curr_board,col,row-1)
+            living_neighbors = living_neighbors + 1;
+        end 
+        if calc_neighbor(curr_board,col,row+1)
+            living_neighbors = living_neighbors + 1;
+        end 
+        if calc_neighbor(curr_board,col+1,row-1)
+            living_neighbors = living_neighbors + 1;
+        end 
+        if calc_neighbor(curr_board,col+1,row)
+            living_neighbors = living_neighbors + 1;
+        end 
+        if calc_neighbor(curr_board,col+1,row+1)
+            living_neighbors = living_neighbors + 1;
+        end 
+        
+        if curr_board(col,row) == 1
+            if living_neighbors < 2
+                new_board(col,row) = 0;
+            elseif living_neighbors > 3
+                new_board(col,row) = 0;
+            else
+                new_board(col,row) = 1;
+            end 
+        end 
+        if curr_board(col,row) == 0
+            if living_neighbors == 3
+                new_board(col,row) = 1;
+            end 
+        end 
     end 
 end 
 
-if j < sz(2)
-    count = arr(i, j + 1) + count;
-    if i >= 2
-        count = arr(i - 1, j + 1) + count;
-    end   
-end
-
-end
+function is_live_neighbor = calc_neighbor(board,col,row)
+[cols,rows] = size(board);
+if col >= 1 && col <= cols && row >= 1 && row <= rows
+    if board(col,row) == 1
+        is_live_neighbor = 1;
+    else 
+        is_live_neighbor = 0;
+    end 
+else 
+    is_live_neighbor = 0;
+end 

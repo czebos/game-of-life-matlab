@@ -1,7 +1,7 @@
 
 % This is the function to call to actually use the game of life
 % Call this function to start the interface
-% Code Time: 1 Hour 30 min (Conrad
+% Code Time: 1 Hour 30 min (Conrad) 3 Hour (Ted)
 function [] = interface()
 prompt = {'Enter X Size:','Enter Y size:'};
 dlgtitle = 'Game of Life Simulator';

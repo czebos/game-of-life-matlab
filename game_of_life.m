@@ -10,8 +10,7 @@
 %       a live cell, as if by reproduction.
 % Given these rules, this function represents the next state of the
 % game of life given the current state
-% Code and debug time: 4 hr (Conrad) 5.5 hr (Ted) (Pair programming 3h,2.5
-% Hr reworking logic because of bug)
+% Code and debug time: 4 hr (Conrad) 6 hr (Ted) 
 % 
 % 
 function new_board = game_of_life(curr_board)

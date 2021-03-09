@@ -1,7 +1,7 @@
 
 % This is the function to call to actually use the game of life
 % Call this function to start the interface
-% Code Time: 1 Hour 30 min (Conrad) 2 Hour (Ted)
+% Code Time: 1 Hour 30 min (Conrad) 3 Hour (Ted)
 function [] = interface()
 prompt = {'Enter X Size:','Enter Y size:','Enter # of steps', 'Random initialization (0/1)?'};
 dlgtitle = 'Game of Life Simulator';
@@ -16,11 +16,8 @@ random = cell2mat(ans(4));
 x = str2num(x);
 y = str2num(y);
 steps = str2num(steps);
-random = str2num(random);
+random
 
-start = zeros(x,y);
-if random == 1
-    start = randi([0 1], x,y);
-end 
-run_life(start, steps);
+
+run_life(zeros(x,y,steps, random));
 end

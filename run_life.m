@@ -2,8 +2,8 @@
 % it allows the user to show the image and update it each
 % time the user wants to toggle the board
 % Code and debug time: 4 hr 30 Min (Conrad Zborowski) 9 hr (Ted)
-function [] = run_life(arr, steps)
-img = disp_board(arr);
+function [] = run_life(arr, steps, color, bg_color)
+img = disp_board(arr, color, bg_color);
 imhandle = imshow(img);
 while 1  
     [xi, yi, but] = ginput(1);
@@ -13,7 +13,7 @@ while 1
     
     if but == 1 % Left Click
         arr = detect_click(arr, xi, yi);  
-        img = disp_board(arr);
+        img = disp_board(arr, color, bg_color);
         set(imhandle, 'CData', img)
     end
     
@@ -24,13 +24,13 @@ while 1
             [real_x1,real_y1] = get_xy(x1,y1);
             og_value1 = arr(real_y1,real_x1);
             arr(real_y1,real_x1) = 2;
-            img = disp_board(arr);
+            img = disp_board(arr, color, bg_color);
             set(imhandle, 'CData', img)
             while 1
                 [x2, y2, but2] = ginput(1);
                 if but2 == 1
                     arr(real_y1,real_x1) = og_value1;
-                    img = disp_board(arr);
+                    img = disp_board(arr, color, bg_color);
                     set(imhandle, 'CData', img)
                     break
                 end 
@@ -45,7 +45,7 @@ while 1
                             start_y = y2; end_y = y1;
                         end 
                         arr = handle_bulk_click(arr, start_x, start_y, end_x, end_y);
-                        img = disp_board(arr);
+                        img = disp_board(arr, color, bg_color);
                         set(imhandle, 'CData', img)
                         break
                     end 
@@ -55,21 +55,19 @@ while 1
     end 
                 
     if but == 115 % S button
-        disp("s pressed");
         for step = 1 : steps
             arr = game_of_life(arr);
-            img = disp_board(arr);
-            set(imhandle, 'CData', img)
+            img = disp_board(arr, color, bg_color);
+            set(imhandle, 'CData', img);
             pause(.5);
         end 
     end
     
     if but == 99 % C button
         arr = zeros(size(arr));
-        img = disp_board(arr);
+        img = disp_board(arr, color, bg_color);
         set(imhandle, 'CData', img);
     end 
-    disp(but)
 end 
 
 % Hides the current image -- exits simulation
@@ -94,7 +92,7 @@ arr(y,x) = ~arr(y,x);
 new_array = arr;
 end 
 
-% This function detects handles bulk clicking 1.5 hr (Ted)
+% This function detects handles bulk clicking 1 hr (Ted)
 function [new_array] = handle_bulk_click(arr, x1, y1, x2,y2)
 % Set the variable to the opposite toggle.
 [rx1,ry1] = get_xy(x1,y1);

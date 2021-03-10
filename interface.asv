@@ -1,23 +1,30 @@
 
 % This is the function to call to actually use the game of life
 % Call this function to start the interface
-% Code Time: 1 Hour 30 min (Conrad) 3 Hour (Ted)
+% Code Time: 1 Hour 30 min (Conrad) 2 Hour (Ted)
 function [] = interface()
-prompt = {'Enter X Size:','Enter Y size:','Enter # of steps', 'Random initialization (0/1)?'};
+prompt = {'Enter X Size:','Enter Y size:','Enter # of steps', 'Random initialization (0/1)?', 'Custom Color (0/1)?'};
 dlgtitle = 'Game of Life Simulator';
 dims = [1 60];
-definput = {'20','20','1','0'}; % Set up base stats
+definput = {'20','20','1','0','0'}; % Set up base stats
 
 ans = inputdlg(prompt,dlgtitle,dims,definput); % Convert to numbers
 x = cell2mat(ans(1));
 y = cell2mat(ans(2));
 steps = cell2mat(ans(3));
 random = cell2mat(ans(4));
+custom_color = cell2mat(ans(5));
 x = str2num(x);
 y = str2num(y);
 steps = str2num(steps);
-random
+random = str2num(random);
+custom_color = str2num(custom_color);
 
-
-run_life(zeros(x,y,steps, random));
+if custom_color
+    color_prompt = {'R:', 'G:', 'B:'}
+start = zeros(x,y);
+if random == 1
+    start = randi([0 1], x,y);
+end 
+run_life(start, steps);
 end

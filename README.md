@@ -32,3 +32,6 @@ To clear the entire board press 'c'.
 
 To quit the simulation press 'q'.
 
+## Demo
+
+![Demo] (demo.gif)

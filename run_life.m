@@ -1,7 +1,10 @@
 % This is the main interaction of the Game of Life program
 % it allows the user to show the image and update it each
 % time the user wants to toggle the board
-% Code and debug time: 4 hr 30 Min (Conrad Zborowski) 9 hr (Ted)
+% Code Time: 3 hr (Conrad) 6 Hr (Zhe) - 3 Hr pair programming initial file, 
+% 3 Hour adding more features 
+% Debug Time: 1 hr 30 Min conrad 3 Hr (Zhe) - Pair debugging initial file,
+% additional 1 Hour 30 Min debugging extra features. 
 function [] = run_life(arr, steps, color, bg_color)
 img = disp_board(arr, color, bg_color);
 imhandle = imshow(img);
@@ -77,7 +80,8 @@ end
 % This function detects the click, checks
 % if it is out of bounds, then gets the assosiated
 % coordinate, and changed it to negative one for the game of life
-% Code and debug time: 3 hr (Conrad) 3 hr (Ted)
+% Code: 2 hr (Conrad) 2 hr (Zhe) - 2 Hours pair programming feature
+% Debug time: 1 hr (Conrad) 1 hr (Zhe) - 1 Hour pair debugging
 function [new_array] = detect_click(arr, xi, yi)
 sz = size(arr);
 % If out of bounds
@@ -92,7 +96,9 @@ arr(y,x) = ~arr(y,x);
 new_array = arr;
 end 
 
-% This function detects handles bulk clicking 1 hr (Ted)
+% This function detects handles right clicks for bulk clicking
+% Code time 45 minutes (Zhe)
+% Debug time 15 minutes (Zhe)
 function [new_array] = handle_bulk_click(arr, x1, y1, x2,y2)
 % Set the variable to the opposite toggle.
 [rx1,ry1] = get_xy(x1,y1);
@@ -101,6 +107,8 @@ arr(ry1:ry2,rx1:rx2) = ~arr(ry1:ry2,rx1:rx2);
 new_array = arr;
 end 
 
+% Helper function for checking if a click is in bounds.
+% Code time 15 minutes (Zhe)
 function in_bounds = check_click_bounds(arr, x, y)
 sz = size(arr);
 % If out of bounds
@@ -114,7 +122,8 @@ end
 
 % This function gets the  X and Y coordinate of the 
 % array based on the 20 pixel situation
-% Code and debug time: 1 hr (Conrad)
+% Code time: 50 minutes (Conrad)
+% Debug Time: 10 minutes (Conrad)
 function [x,y] = get_xy(xi, yi)
 x = (xi - 40) / 20;
 y = (yi - 40) / 20;

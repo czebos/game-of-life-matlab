@@ -34,4 +34,4 @@ To quit the simulation press 'q'.
 
 ## Demo
 
-![alt text] (https://github.com/czebos/game-of-life-matlab/blob/master/demo.gif)
+![alt text](demo.gif)
